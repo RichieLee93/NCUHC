@@ -1,6 +1,5 @@
 # Novelty-Characterization-Using-Hierarchical-Clustering
 
-# Novelty Description Language
 
 An unsupervised learning method for novelty detection and characterization based on qualitative spatial relations.
 
