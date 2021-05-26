@@ -1,4 +1,4 @@
-# Novelty-Characterization-Using-Hierarchical-Clustering
+# Novelty Characterization Using Hierarchical Clustering
 
 
 An unsupervised learning method for novelty detection and characterization based on qualitative spatial relations.
