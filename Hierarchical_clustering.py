@@ -104,9 +104,9 @@ def merge_duplicated_data(df):
     
 
 if __name__ == '__main__':
-    write_path = "/home/richie/Desktop/result/geojson/noprepro/10_times/0.95/result_170_10_hard_5_bird_only/"
+    write_path = "result_170_10_hard_5_bird_only/"
     Path(write_path).mkdir(parents=True, exist_ok=True)
-    df = pd.read_csv("/home/richie/Desktop/pddl/geojson/data/temp_train_170_10_merged_nosequ.csv")
+    df = pd.read_csv("data/temp_train_170_10_merged_nosequ.csv")
     df[ "objpair_type" ] = df[ "objectid_pair" ].apply(lambda x: get_objpair_type(x))
     print(df.shape)
     df = df[df['objpair_type'].str.contains("bird")]
@@ -148,23 +148,7 @@ if __name__ == '__main__':
     with open(write_path + 'initial_dist_dict.pkl', 'wb') as f:
         pickle.dump(initial_dist_dict, f)
 
-    # with open(write_path + 'initial_dist_dict1.pkl', 'rb') as f:
-    #     initial_dist_dict = pickle.load(f)
-    """
-    sp = [0, 100000, 200000, 300000, 411912-1]
-    for m in range(len(sp)-1):
-        for i in range(sp[m], sp[m+1]):
-            for j in range(i+1, len(data)):
-                if hierachical_clustering(data[i], data[j]) !=0:
-                    initial_dist_dict[(i, j)] = hierachical_clustering(data[i], data[j])
-            if i%10000 == 0:
-                print("Finished {}th data, time is {}".format(i, datetime.datetime.now()))
-                print(len(initial_dist_dict))
-        # for k, v in intial_dist_dict.items():
-        #     if v >0:
-        #         print(k,v)
-        json.dump(initial_dist_dict, open(write_path + "initial_dist_dict_{}.json".format(m), 'w') )
-    """
+
 
     # # Read data from file:
     # data = json.load( open( "file_name.json" ) )
@@ -199,7 +183,6 @@ if __name__ == '__main__':
                     initial_dist_dict[(i, max_index)] = dist
         # print(len(initial_dist_dict))
         v = list(initial_dist_dict.values())
-        # print(222, len(data)-1, max_pair)
 
         if v:
             max_dist = max(v)
@@ -209,7 +192,6 @@ if __name__ == '__main__':
             for k in initial_dist_dict.copy():
                 if max_pair[0] in k or max_pair[1] in k:
                     del initial_dist_dict[k]
-            # print(111, len(initial_dist_dict), max_pair)
             cluster_merge = new_data[max_pair[0]] + new_data[max_pair[1]]
             new_data[max_index+1] = cluster_merge
             del new_data[max_pair[0]]
@@ -219,14 +201,7 @@ if __name__ == '__main__':
             print("The size of original dataset is {}, now is {}, max distance is {}, dict size is {}".format(total_num, len(new_data), max_dist, len(initial_dist_dict)), "Used time: {}".format(time.time() - start_time))
             X.append(len(new_data))
             Y.append(max_dist)
-            # temp = []
-            # if (len(data) - total_num) % 2000 == 0:
-            #     temp = data
-            #     remove_cluster_list.sort(reverse=True)
-            #     for r in remove_cluster_list:
-            #         del temp[r]
-            #     with open(write_path + "data_{}_{}.txt".format(round(max_dist, 3), len(temp)), "wb") as fp:   #Pickling
-            #         pickle.dump(temp, fp)
+
         else:
             with open(write_path + "data_{}.txt".format(len(new_data)), "wb") as fp:   #Pickling
                 pickle.dump(list(new_data.values()), fp)
