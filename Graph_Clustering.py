@@ -19,17 +19,6 @@ def graph_clustering(data, graph, num, constraint):
 			if num == 6 and count >= num:
 				flag_match = True
 				break
-	# # add the threshold to clustering process
-	# new_cluster = graph + data
-	# if (flag_match and len(new_cluster) > 2 and thres > 5 and thres < 8) or (flag_match and thres <= 5) or ((flag_match and len(new_cluster) > 2 and thres > 5 and thres < 8)):
-	#
-	# 	for j in range(5):
-	# 		l = [item[j] for item in new_cluster]
-	# 		f = Counter(l).most_common(1)[0]
-	# 		if f[1] >= 0.1*thres*len(new_cluster):
-	# 			count += 1
-	# 	if count < number_qsr:
-	# 		flag_match = False
 
 	return flag_match
 	
@@ -53,18 +42,7 @@ def get_cluster(data, num, constraint):
 		if i%100000 == 0:
 			print("Finished {}th data, time is {}".format(i, datetime.datetime.now()))
 	print("After processing {}th data, the number of clusters is {}".format(len(data), len(graph)))
-	# result = list(graph.values())
-	# if thres <= 5:
-	# 	final_result = result
-	# else:
-	# 	final_result = []
-	# 	for j in result:
-	# 		if len(j) == 2:
-	# 			final_result.append([j[0]])
-	# 			final_result.append([j[1]])
-	# 		else:
-	# 			final_result.append(j)
-	# print("Finally the firdt round clustering generated {} clusters".format(len(final_result)))
+
 	return list(graph.values())
 		
 
