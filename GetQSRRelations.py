@@ -20,23 +20,15 @@ def main(data, index):
     :param data: Loaded json file of groudtruth.json
     :return: Dictionaries of RCC and direction of all objects
     """
-    # for i in data[0]["features"]:
-    #     if i["properties"]["label"] not in ["Ground", "Slingshot", "Trajectory"]:
-    #         print(i["properties"]["label"], i["geometry"]["coordinates"])
-    # [for i in data[0]["features"] if i["properties"]["label"] not in ["Ground", "Slingshot", "Trajectory"]]
-    filtered_data = [{"code": i["properties"]["id"], "typeobj": i["properties"]["label"].split("*")[0], "velocity": i["properties"]["label"].split("*")[-1], "vertices": i["geometry"]["coordinates"][0]} for i in data[0]["features"] if i["properties"]["label"].split("*")[0] not in ["Ground", "Slingshot", "Trajectory"]]
-    # print(filtered_data[0]["vertices"])
-    # for i in range(len(filtered_data)):
-    #     filtered_data[i]["vertices"] = [[840-j[0], 480-j[1]] for j in filtered_data[i]["vertices"]]
-    # print(filtered_data[0]["vertices"])
 
-    # for i in filtered_data:
-    #     i["vertices"] = [[row['x'], row['y']] for row in i["vertices"] for key in ['x', 'y']]
-        # i["velocity"] = [i["velocity"]["x"], i["velocity"]["y"]]
-    cdr_dict = {}
-    qasz_dict = {}
-    qasp_dict = {}
-    qaspa_dict = {}
+    filtered_data = [{"code": i["properties"]["id"], "typeobj": i["properties"]["label"].split("*")[0], "velocity": i["properties"]["label"].split("*")[-1], "vertices": i["geometry"]["coordinates"][0]} for i in data[0]["features"] if i["properties"]["label"].split("*")[0] not in ["Ground", "Slingshot", "Trajectory"]]
+
+
+
+#     cdr_dict = {}
+#     qasz_dict = {}
+#     qasp_dict = {}
+#     qaspa_dict = {}
     rcc_dict = {}
     direction_dict = {}
     distance_dict = {}
@@ -49,11 +41,7 @@ def main(data, index):
         
         obj_name = str(i["code"].split("_")[-1]) + "_" + str(i["typeobj"]) + "*" + str(j["code"].split("_")[-1]) + "_" + str(j["typeobj"])
         rcc_dict[obj_name] = compute_rcc_rel(i["vertices"], j["vertices"])
-        # print(2,rcc_dict[obj_name] )
-        # if rcc_dict[obj_name]=="ntpp" or rcc_dict[obj_name]=="po":
-        #     print(1, obj_name, rcc_dict[obj_name])
-        #     print(i["vertices"])
-        #     print(j["vertices"])
+
 
         direction_dict[obj_name], distance_dict[obj_name], center_dict[obj_name] = directionDistanceRelations(i["vertices"], j["vertices"])
         # cdr_dict[obj_name] = CDRRelation(i["vertices"], j["vertices"])
@@ -67,8 +55,7 @@ def main(data, index):
 
 if __name__ == '__main__':
     start_time = time.time()
-    data_dir = '/home/richie/Desktop/sciencebirdsframework-release-alpha0.4.1/ScienceBirds/linux/gt_level_2_type_2_604/'
-    # data_dir = '/home/richie/Desktop/sciencebirdsframework-release-alpha0.4.1/ScienceBirds/linux/gt/'
+    # data_dir = 'sciencebirdsframework-release-alpha0.4.1/ScienceBirds/linux/gt/'
     all_data = os.listdir(data_dir)
 
     level_index_pair = [[re.split("\.|\_", i)[0], re.split("\.|\_", i)[1]] for i in all_data]
@@ -83,8 +70,7 @@ if __name__ == '__main__':
         if int(k) in [c for c in range(0, 5)]:
             for index in v:
                 data_path = data_dir + "%s_%s_GTData.json"% (k, index)
-                write_path = "/home/richie/Desktop/pddl/geojson/gt_batch_new_split_eval_gt_level_2_type_2_604_naive/%s/"% k
-                # write_path = "/home/richie/Desktop/pddl/geojson/gt_batch_new_split_test_3_merged_naive/%s/"% k
+                write_path = "/home/richie/Desktop/pddl/geojson/gt_batch_new_split_test_3_merged_naive/%s/"% k
                 rcc_write_path = write_path+ "%s_rcc.json"%index
                 direction_write_path = write_path+ "%s_direction.json"%index
                 distance_write_path = write_path+ "%s_distance.json"%index
@@ -98,7 +84,6 @@ if __name__ == '__main__':
                 Path(write_path).mkdir(parents=True, exist_ok=True)
                 with open(data_path) as f:
                     data_gt = json.load(f)
-                # print(data_path)
                 # rcc_relations, direction_relations, distance_relations, center_relations, cdr_relations, qasz_relations, qasp_relations, qaspa_relations, temporal_relations = main(data_gt, index)
                 rcc_relations, direction_relations, distance_relations, center_relations, temporal_relations = main(data_gt, index)
                 #
