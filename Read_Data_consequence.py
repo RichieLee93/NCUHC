@@ -8,15 +8,7 @@ from pathlib import Path
 
 
 def convert_dist(dist, thres_dist_list):
-	# dist_dict = {0: [0, 0], 1: [1, 3], 2: [4, 6], 3: [7, 9], 4: [10, 12], 5: [13, 15],
-	#              6: [16, 20], 7: [21, 25], 8: [26, 30], 9: [31, 35], 10: [36, 40], 11: [41, 50],
-	#              12: [51, 60], 13: [61, 70], 14: [71, 80], 15: [81, 90], 16: [91, 100], 17: [101, 130],
-	#              18: [131, 160], 19: [161, 190], 20: [191, 220], 21: [221, 270], 22: [271, 320], 23: [321, 10000]}
-	dist_dict = {0: [0, 0], 1: [1, 3], 2: [4, 6], 3: [7, 9], 4: [10, 20], 5: [21, 30], 6: [31, 50],
-	             7: [51, 70], 8: [71, 130], 9: [131, 190], 10: [191, 270], 11: [271, 10000]}
-	# for k,v in dist_dict.items():
-	# 	if dist<=v[1] and dist>=v[0]:
-	# 		return k
+
 	dist_dict = {0: [0, thres_dist_list[0]], 1: [thres_dist_list[0]+1, thres_dist_list[1]], 2: [thres_dist_list[1]+1, 1000]}
 	dist = round(float(dist))
 	# print(111, dist_dict)
@@ -27,8 +19,8 @@ def convert_dist(dist, thres_dist_list):
 	return dist_index
 
 def read_data(thres_dist):
-	path = "/home/richie/Desktop/pddl/geojson/gt_batch_new_split_eval_gt_level_2_type_2_604_naive/"
-	exist_path_ori = "/home/richie/Desktop/pddl/geojson/gt_batch_new_exist_eval_gt_level_2_type_2_604_naive/"
+	path = "gt_batch_new_split_eval_gt_naive/"
+	exist_path_ori = "gt_batch_new_exist_eval_gt_naive/"
 	batch_level_dir = [int(lvl) for lvl in os.listdir(path)]
 	levels_gt_dict = {}
 	for i in batch_level_dir:
@@ -59,10 +51,10 @@ def read_data(thres_dist):
 		dist_all = [ ]
 		direct_all = [ ]
 		center_all = []
-		cdr_all = [ ]
-		qasz_all = [ ]
-		qasp_all = [ ]
-		qaspa_all = [ ]
+# 		cdr_all = [ ]
+# 		qasz_all = [ ]
+# 		qasp_all = [ ]
+# 		qaspa_all = [ ]
 		exist_all = []
 		temporal_all = []
 		for t in range(total_num):
@@ -140,19 +132,10 @@ def read_data(thres_dist):
 							  str(data_exist_start[key.split("*")[0]])+"_"+ str(data_exist_start[key.split("*")[1]]), str(data_exist_end[key.split("*")[0]])+"_"+ str(data_exist_end[key.split("*")[1]]),
 							  data_temporal_start[key], data_temporal_end[key]])
 
-		# 		else:
-		# 			break
-		# # print("ffff", state)
-		# # for i in state:
-		# # 	print(i)
-		# # state_transposed = zip(state)
-		print(len(state))
+
 		if state:
 			df = pd.DataFrame(state)
-			# df.columns = [ "objectid_pair", "rcc_start", "rcc_end", "dist_start", "dist_end", "direct_start", "direct_end",
-			# 		    "center_start", "center_end", "cdr_start", "cdr_end",
-			# 		    "qasz_start", "qasz_end", "qasp_start", "qasp_end", "qaspa_start", "qaspa_end",
-			# 		       "exist_start", "exist_end", "temporal_start", "temporal_end" ]
+
 			df.columns = [ "objectid_pair", "rcc_start", "rcc_end", "dist_start", "dist_end", "direct_start", "direct_end",
 					    "qtc_start", "qtc_end", "exist_start", "exist_end", "temporal_start", "temporal_end" ]
 			write_path = "/home/richie/Desktop/pddl/geojson/distrcc_thres_new_split_eval_gt_level_2_type_2_604_naive/"
