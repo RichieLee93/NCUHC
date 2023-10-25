@@ -20,6 +20,7 @@ Python 3.6+
 If you find this method useful, please cite:
 
 @inproceedings{KR2021-43,\
+
     title     = {{Unsupervised Novelty Characterization in Physical Environments Using Qualitative Spatial Relations}},\
     author    = {Li, Ruiqi and Hua, Hua and Haslum, Patrik and Renz, Jochen},\
     booktitle = {{Proceedings of the 18th International Conference on Principles of Knowledge Representation and Reasoning}},\
