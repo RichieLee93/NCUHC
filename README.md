@@ -20,14 +20,14 @@ Python 3.6+
 If you find this method useful, please cite:
 
 @inproceedings{KR2021-43,<br>
-    title     = {{Unsupervised Novelty Characterization in Physical Environments Using Qualitative Spatial Relations}},
-    author    = {Li, Ruiqi and Hua, Hua and Haslum, Patrik and Renz, Jochen},
-    booktitle = {{Proceedings of the 18th International Conference on Principles of Knowledge Representation and Reasoning}},
-    pages     = {454--464},
-    year      = {2021},
-    month     = {11},
-    doi       = {10.24963/kr.2021/43},
-    url       = {https://doi.org/10.24963/kr.2021/43},
+    title     = {{Unsupervised Novelty Characterization in Physical Environments Using Qualitative Spatial Relations}},<br>
+    author    = {Li, Ruiqi and Hua, Hua and Haslum, Patrik and Renz, Jochen},<br>
+    booktitle = {{Proceedings of the 18th International Conference on Principles of Knowledge Representation and Reasoning}},<br>
+    pages     = {454--464},<br>
+    year      = {2021},<br>
+    month     = {11},<br>
+    doi       = {10.24963/kr.2021/43},<br>
+    url       = {https://doi.org/10.24963/kr.2021/43},<br>
   }
 
 
